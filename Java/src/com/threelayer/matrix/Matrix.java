@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.threelayer.interfaces.Mapper;
+
+import com.threelayer.interfaces.Apply;
+import com.threelayer.interfaces.Map;
 
 public class Matrix{
     private int rows;
@@ -98,7 +100,7 @@ public class Matrix{
         return result;
     }
 
-    public Matrix map(Mapper fn){
+    public Matrix map(Map fn){
         Matrix result = new Matrix(this.rows, this.cols);
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.cols; j++){
@@ -108,10 +110,10 @@ public class Matrix{
         return result;
     }
 
-    public void apply(Mapper fn){
+    public void apply(Apply fn){
         for(int i = 0; i < this.rows; i++){
             for(int j = 0; j < this.cols; j++){
-                this.data[i][j] = fn.map(this.data[i][j]);
+                this.data[i][j] = fn.apply(this.data[i][j]);
             }
         }
     }

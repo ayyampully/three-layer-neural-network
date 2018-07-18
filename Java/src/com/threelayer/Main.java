@@ -1,26 +1,30 @@
 package com.threelayer;
 
 
-import com.threelayer.neuralnetwork.Matrix;
+import com.threelayer.interfaces.Mapper;
+import com.threelayer.matrix.Matrix;
+import com.threelayer.neuralnetwork.NeuralNetwork;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.ValidationException;
 
 public class Main {
     private static Logger logger = Logger.getLogger("main");
-    public static void main(String[] args){
-        Matrix m1 = new Matrix(2, 2);
-        Matrix m2 = new Matrix(2, 2);
-        m1.randomize();
-        m2.randomize();
 
-        m1.print();
-        m2.print();
+
+    public static void main(String[] args){
+        NeuralNetwork neuralNetwork = new NeuralNetwork(2, 2, 1);
+        double[] input = {0, 1};
         try {
-            Matrix m3 = Matrix.multiply(m1, m2);
-            m3.print();
+            List out = neuralNetwork.predict(input);
+            logger.log(Level.INFO, out.toString());
         } catch (ValidationException ex){
             logger.log(Level.SEVERE, ex.toString());
         }
+
     }
 }
